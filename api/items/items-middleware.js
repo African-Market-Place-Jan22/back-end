@@ -1,6 +1,6 @@
 const Item = require('./items-model');
 
-function logger(req,res, next){
+function logger (req,res, next) {
     console.log(`logger middleware`)
     next()
 }
@@ -28,6 +28,7 @@ function validateItem (req, res, next) {
 }
 
 module.exports = {
-    checkItemId,
+    validateItemId,
     validateItem,
+    logger,
 }
