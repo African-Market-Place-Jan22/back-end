@@ -80,25 +80,24 @@ describe(" Items Endpoints", () => {
   });
 
   test("[6] Add Items", async () => {
-    await request(server).post('/api/auth/register').send({username: "John", password: "1234"});
     await request(server)
-      .post('/api/auth/login')
-      .send({ username: 'sam', password: '1234' });
-   const res = await request(server).post('/api/items/').send({
-    item_name: "Rice",
-    item_description: "Locally grown long grain rice.",
-    item_price: 7.99,
-    item_category: "Grains",
-    user_id: 1,
-
+      .post("/api/auth/register")
+      .send({ username: "John", password: "1234" });
+    await request(server)
+      .post("/api/auth/login")
+      .send({ username: "sam", password: "1234" });
+    const res = await request(server).post("/api/items/").send({
+      item_name: "Rice",
+      item_description: "Locally grown long grain rice.",
+      item_price: 7.99,
+      item_category: "Grains",
+      user_id: 1,
     });
     let allitems;
-    allitems = await db('items');
-    expect(allitems).toBe(allitems)
+    allitems = await db("items");
+    expect(allitems).toBe(allitems);
     expect(res.body.message).toMatch(/Token required/i);
   });
-
-
 
   test("[7] ID is Required for adding Items ", async () => {
     await request(server)
@@ -117,38 +116,34 @@ describe(" Items Endpoints", () => {
     expect(res.status).toBe(401);
     expect(res.body.message).toMatch(/Token required/i);
   });
-  
-  test("[9] Returns the single item associated with that item id ", async () => {
+
+  test("[8] Returns the single item associated with that item id ", async () => {
     await request(server)
       .post("/api/auth/register")
       .send({ username: "John", password: "1234" });
     await request(server)
       .post("/api/auth/login")
       .send({ username: "sam", password: "1234" });
-    await request(server)
-      .get("/api/items/:item_id")
-      .send({item_id:'1'
-});
-  })
-  test("[8] Returns correct error message when item id is missing ", async () => {
+    await request(server).get("/api/items/:item_id").send({ item_id: "1" });
+  });
+
+  test("[9] Returns correct error message when item id is missing ", async () => {
     await request(server)
       .post("/api/auth/register")
       .send({ username: "John", password: "1234" });
     await request(server)
       .post("/api/auth/login")
       .send({ username: "sam", password: "1234" });
-    const res = await request(server)
-      .get("/api/items/:item_id")
-      .send({
-        item_name: "Beans",
-        item_description: "Locally grown beans.",
-        item_price: 5.99,
-        item_category: "Grains",
-      });
+    const res = await request(server).get("/api/items/:item_id").send({
+      item_name: "Beans",
+      item_description: "Locally grown beans.",
+      item_price: 5.99,
+      item_category: "Grains",
+    });
     expect(res.status).toBe(401);
   });
-  
-  test("[9] Deleting Item ", async () => {
+
+  test("[10] Deleting Item ", async () => {
     await request(server)
       .post("/api/auth/register")
       .send({ username: "John", password: "1234" });
@@ -157,7 +152,6 @@ describe(" Items Endpoints", () => {
       .send({ username: "sam", password: "1234" });
     await request(server)
       .delete("/api/items/:item_id")
-      .send({item_id:'Deleted item'
+      .send({ item_id: "Deleted item" });
+  });
 });
-  })
-})
