@@ -64,9 +64,6 @@ describe("[POST] Auth Endpoints", () => {
 describe(" Items Endpoints", () => {
   test("[5] Returns array of all items in the database", async () => {
     await request(server)
-      .post("/api/auth/register")
-      .send({ username: "John", password: "1234" });
-    await request(server)
       .post("/api/auth/login")
       .send({ username: "sam", password: "1234" });
     const res = await request(server).get("/api/items/").send({
@@ -80,9 +77,6 @@ describe(" Items Endpoints", () => {
   });
 
   test("[6] Add Items", async () => {
-    await request(server)
-      .post("/api/auth/register")
-      .send({ username: "John", password: "1234" });
     await request(server)
       .post("/api/auth/login")
       .send({ username: "sam", password: "1234" });
@@ -101,9 +95,6 @@ describe(" Items Endpoints", () => {
 
   test("[7] ID is Required for adding Items ", async () => {
     await request(server)
-      .post("/api/auth/register")
-      .send({ username: "John", password: "1234" });
-    await request(server)
       .post("/api/auth/login")
       .send({ username: "sam", password: "1234" });
     const res = await request(server).post("/api/items/").send({
@@ -119,18 +110,12 @@ describe(" Items Endpoints", () => {
 
   test("[8] Returns the single item associated with that item id ", async () => {
     await request(server)
-      .post("/api/auth/register")
-      .send({ username: "John", password: "1234" });
-    await request(server)
       .post("/api/auth/login")
       .send({ username: "sam", password: "1234" });
     await request(server).get("/api/items/:item_id").send({ item_id: "1" });
   });
 
   test("[9] Returns correct error message when item id is missing ", async () => {
-    await request(server)
-      .post("/api/auth/register")
-      .send({ username: "John", password: "1234" });
     await request(server)
       .post("/api/auth/login")
       .send({ username: "sam", password: "1234" });
@@ -144,9 +129,6 @@ describe(" Items Endpoints", () => {
   });
 
   test("[10] Deleting Item ", async () => {
-    await request(server)
-      .post("/api/auth/register")
-      .send({ username: "John", password: "1234" });
     await request(server)
       .post("/api/auth/login")
       .send({ username: "sam", password: "1234" });
