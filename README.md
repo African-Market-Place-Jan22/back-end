@@ -1,6 +1,7 @@
 # <p>Backend For African Marketplace 01.</P>
 
-## <p>https://backend-african-marketplace.herokuapp.com/</p>
+## <p>Backend Deploy: https://backend-african-marketplace.herokuapp.com/</p>
+## <p>Frontend Deploy: https://front-end-rho-gold.vercel.app/</p>
 
 ## REGISTER and LOGIN ENDPOINTS
 
